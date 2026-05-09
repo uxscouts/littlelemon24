@@ -209,6 +209,7 @@ const BookingForm = ({
                   aria-required="true"
                   aria-labelledby="label-time"
                 >
+                  <option>00:00</option>
                   {availableTimes.map((timeOption) => (
                     <option key={timeOption} value={timeOption}>
                       {timeOption}

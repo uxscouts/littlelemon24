@@ -8,8 +8,23 @@ const ConfirmedBooking = () => {
   
   console.log("Data received in ConfirmedBooking:", data);
 
+  function DebugComponent({ somedata }) {
+  return (
+    <pre>
+      {JSON.stringify(somedata, null, 2)}
+    </pre>
+  );
+}
+
   return (
     <Container>
+      <Row>
+        <Col>
+        <pre>
+        {JSON.stringify(data, null, 2)}
+        </pre>
+        </Col>
+      </Row>
       <Row>
         <Col><h1>Booking Confirmed!</h1></Col>
       </Row>

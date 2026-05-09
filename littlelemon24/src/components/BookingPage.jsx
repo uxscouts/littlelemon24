@@ -1,10 +1,9 @@
-import React, { useState, useReducer } from "react";
-// import BookingForm from "./BookingForm";
+import React, { useState, useReducer, useEffect } from "react";
 import BookingForm from "./BookingForm3";
 import { fetchAPI } from "../API";
 import { submitAPI } from "../API2";
 import { useNavigate } from "react-router-dom";
-import Button from 'react-bootstrap/Button';
+
 
 export const updateTimes = (state, action) => {
   switch (action.type) {
@@ -30,7 +29,9 @@ function BookingPage() {
   const [availableTimes, dispatch] = useReducer(
     updateTimes, [], initializeTimes);
 
- const [formData, setFormData] = useState({});
+
+  const [formData, setFormData] = useState({}); 
+
  
  // the useNavigate hook is so the user is automatically
  // sent to confirmation page after successfully completing form
@@ -38,7 +39,9 @@ function BookingPage() {
 
 
   // initial creation of the array for holding reservations
-  // must add new reservations to array using spread operator  
+  // must add new reservations to array using spread operator 
+
+  /*
 const [reservations, setReservations] = useState([
   { id: 1, 
     name: "Samual L Jackson", 
@@ -48,6 +51,10 @@ const [reservations, setReservations] = useState([
     date: "2026-05-01", 
     time: "18:00"}
 ]);
+*/
+
+const [reservations, setReservations] = useState([]);
+const [shouldAlert, setShouldAlert] = useState(false);
 
 
 // Add a new reservation
@@ -59,17 +66,44 @@ const addReservation = (newBooking) => {
 };
 
 
+{/*
+
   const handleFormSubmit = async (formData) => {
         const response = await submitAPI(formData);
     if (response) {
       const finalBooking = { id: Date.now(), ...formData };
       addReservation(finalBooking);
       console.log(reservations);
-      alert("Reservation confirmed!");
+     // alert("Reservation confirmed!");
+      alert(`Reservation confirmed!:\n${JSON.stringify(reservations, null, 2)}`);
      // navigate('/confirmedbooking');
-    // navigate('/confirmedbooking', { state: { data: reservations } });
     }
   };
+
+  */}
+
+
+const handleFormSubmit = async (formData) => {
+  const response = await submitAPI(formData);
+  if (response) {
+    const finalBooking = { id: Date.now(), ...formData };
+    addReservation(finalBooking); // This updates the state
+    setShouldAlert(true); // Trigger effect
+  }
+};
+
+// This effect runs whenever 'reservations' changes
+useEffect(() => {
+  if (shouldAlert && reservations.length > 0) {
+    alert(`Reservation confirmed!:\n${JSON.stringify(reservations, null, 2)}`);
+    setShouldAlert(false); // Reset trigger
+  }
+}, [reservations, shouldAlert]);
+
+
+
+
+
 
 
   return (
@@ -84,7 +118,11 @@ const addReservation = (newBooking) => {
             onChildSubmit={handleFormSubmit} 
           />   
           
-          {reservations && <div className="container"><p>Submitted: {JSON.stringify(reservations)}</p></div>}
+          <div className="container">
+            <pre>
+              {JSON.stringify(reservations, null, 2)}
+            </pre>
+          </div>
       </section>
     </main>
   );

@@ -1,7 +1,6 @@
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import NavDropdown from 'react-bootstrap/NavDropdown';
 import logo from '../assets/images/LemonLogo.png';
 
 function Navbar3() {
@@ -9,7 +8,7 @@ function Navbar3() {
     <>
     <Navbar expand="lg" className="bg-body-tertiary">
       <Container>
-        <Navbar.Brand href="#home"><img src={logo} alt="Little Lemon Logo" /></Navbar.Brand>
+        <Navbar.Brand href="/"><img src={logo} alt="Little Lemon Logo" /></Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
@@ -18,7 +17,6 @@ function Navbar3() {
             <Nav.Link href="/#specials">Menu</Nav.Link>
             <Nav.Link href="/reservation">Reservation</Nav.Link>
             <Nav.Link href="/#specials">Order Online</Nav.Link>
-            <Nav.Link href="/testing">Testing</Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Container>
