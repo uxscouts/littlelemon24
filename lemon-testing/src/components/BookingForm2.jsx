@@ -22,6 +22,7 @@ const bookingSchema = Yup.object().shape({
 
 
 const BookingForm = () => {
+  
   const formik = useFormik({
     initialValues: {
       name: '',

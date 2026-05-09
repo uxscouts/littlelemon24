@@ -8,7 +8,6 @@ import TestForm3 from '../components/TestForm3.jsx';
 const Home = () => {
     return(
        <>
-       <TestForm3/>
         <HomeIntro/>
          <Specials/>
           <Reviews/>
