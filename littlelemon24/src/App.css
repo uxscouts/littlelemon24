@@ -488,7 +488,7 @@ gap: 2em;
 }
 
 
-
+/*
 .BookingFormContainer button {
   background-color: #ee9972;
   color: white;
@@ -497,6 +497,7 @@ gap: 2em;
   font-size: 170%;
   cursor: pointer;
 }
+*/
 
 .text-center {
   text-align: center;

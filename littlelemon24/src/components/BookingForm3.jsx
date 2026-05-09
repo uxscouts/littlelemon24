@@ -38,7 +38,7 @@ const BookingForm = ({
       email: '',
       phone: '',
       guests: 2,
-      date: '05/09/2026',
+      date: '',
       time: '',
     },
     validationSchema: bookingSchema,
@@ -60,7 +60,7 @@ const BookingForm = ({
   const [phone, setPhone] = useState(booking.phone || "123-456-7890");
   const [guests, setGuests] = useState(booking.guests || "4");
   const [date, setDate] = useState(booking.date || "2026-05-07");
-  const [time, setTime] = useState(booking.time || "17:00");
+  const [time, setTime] = useState(booking.time || "");
 
   // for the date field to set earliest and latest date for Reservation 
   /*
@@ -127,34 +127,12 @@ const BookingForm = ({
             <FormFeedback>{formik.errors.name}</FormFeedback>
         </FormGroup>
 
-{/*}
-          <FormGroup>
-            <Label htmlFor="name" id="label-name">Full Name:</Label>
-            <Input 
-             id="res-name" 
-              name="name" 
-              type="text" 
-              placeholder="Name" 
-              aria-required="true"
-              aria-labelledby="label-name"
-              minLength="2" 
-              maxLength="30" 
-              pattern="[a-zA-Z\s]+" 
-              title="Name should only contain letters and spaces"               
-              value={name}
-              onChange={(e) => setName(e.target.value)}                     
-            />            
-          </FormGroup>
-*/}
-
-
         <FormGroup>
             <Label htmlFor="email">Email address:</Label>
             <Input
             id="email"
             name="email"
             type="email"
-            placeholder="Email"
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             value={formik.values.email}
@@ -163,22 +141,6 @@ const BookingForm = ({
             <FormFeedback>{formik.errors.email}</FormFeedback>
         </FormGroup>
         
-
-{/*
-          <FormGroup>
-            <Label htmlFor="email" id="label-email">Email address:</Label>
-            <Input 
-              name="email" 
-              type="email" 
-              placeholder="Email" 
-              aria-required="true"
-              aria-labelledby="label-email"  
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}                     
-            />             
-           </FormGroup>
-*/}
-
 
 
       <FormGroup>
@@ -196,26 +158,6 @@ const BookingForm = ({
       </FormGroup>
 
 
-
-{/*
-           <FormGroup>
-            <Label htmlFor="phone" id="label-phone">Phone number (Format: 123-456-7890):</Label>
-            <Input 
-              name="phone" 
-              type="tel" 
-              aria-required="true" 
-              aria-labelledby="label-phone"
-              pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
-              placeholder="123-456-7890"
-              title="Phone number must be in the format 123-456-7890"               
-              value={phone}
-              onChange={(e) => setPhone(e.target.value)}                     
-            />             
-           </FormGroup> 
-*/}
-
-
-
       <FormGroup>
         <Label htmlFor="guests">Guests (2-8):</Label>
         <Input
@@ -231,27 +173,8 @@ const BookingForm = ({
       </FormGroup>
 
 
-{/*
            <FormGroup>
-            <Label htmlFor="guests" id="label-guests">Guests (2-8):</Label>
-            <Input 
-              name="guests" 
-              type="number" 
-              id="guests" 
-              min="2" 
-              max="8"               
-              placeholder="2" 
-              aria-required="true"
-              aria-labelledby="label-guests"  
-              value={guests}
-              onChange={(e) => setGuests(e.target.value)}                     
-            />             
-           </FormGroup> 
-*/}
-
-
-           <FormGroup>
-            <Label htmlFor="date" id="label-date">Booking Date (Max 2-month advance):</Label>
+            <Label htmlFor="date" id="label-date">Booking Date:</Label>
             <Input 
               id="date"
               name="date" 
@@ -264,12 +187,11 @@ const BookingForm = ({
                 }} 
               onBlur={formik.handleBlur}
               value={formik.values.date}
+              invalid={formik.touched.date && !!formik.errors.date}
               aria-required="true"
               aria-labelledby="label-date"                                   
             />             
            </FormGroup>
-
-{/*}
 
               <FormGroup>
                 <Label htmlFor="time" id="label-time">
@@ -278,7 +200,12 @@ const BookingForm = ({
                 <select
                   name="time"
                   id="time"
-                  onChange={handleTimeChange}
+                  onChange={(e) => {
+                      formik.handleChange(e);
+                    }} 
+                  onBlur={formik.handleBlur}
+                  value={formik.values.time}
+                  invalid={formik.touched.time && !!formik.errors.time} 
                   aria-required="true"
                   aria-labelledby="label-time"
                 >
@@ -289,32 +216,9 @@ const BookingForm = ({
                   ))}
                 </select>
               </FormGroup>
-*/}
 
 
 {/*
-            <FormGroup>
-            <Label htmlFor="time">Time</Label>  
-              <div className="box">
-              {availableTimes.map((timeOption) => (
-                  <div key={timeOption} className="timeOptions">
-                      <input
-                        type="radio"
-                        id={timeOption}
-                        name="time"
-                        value={timeOption}
-                        onChange={handleTimeChange}
-                        required
-                        aria-required="true"
-                      />
-                      {timeOption}
-                  </div>
-                ))}
-                </div>
-          </FormGroup>
-*/}
-
-
 
             <FormGroup>
             <Label htmlFor="time">Time</Label>  
@@ -337,6 +241,8 @@ const BookingForm = ({
                 ))}
                 </div>
           </FormGroup>
+*/}
+
 
         <Button 
             type="submit" 
