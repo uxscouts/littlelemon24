@@ -6,18 +6,32 @@ const ConfirmedBooking = () => {
   const location = useLocation();
   const data = location.state;
   
+  
   console.log("Data received in ConfirmedBooking:", data);
 
-  function DebugComponent({ somedata }) {
-  return (
-    <pre>
-      {JSON.stringify(somedata, null, 2)}
-    </pre>
-  );
-}
+  const response = { 
+    data: [ 
+      { id: 1778371992096, name: "sddsf", email: "asdf@asdf.com", phone: "123-456-7890", guests: 2, date: "2026-05-19", time: "22:30" } 
+    ] 
+  };
 
   return (
     <Container>
+
+
+    <div>
+      {response.data.map((item) => (
+        <div key={item.id}>
+          <p>Name: {item.name}</p>
+          <p>Email: {item.email}</p>
+          <p>Phone: {item.phone}</p>
+          <p>Guests: {item.guests}</p>
+          <p>Appointment: {item.date} at {item.time}</p>
+        </div>
+      ))}
+    </div>
+
+
       <Row>
         <Col>
         <pre>
@@ -29,7 +43,7 @@ const ConfirmedBooking = () => {
         <Col><h1>Booking Confirmed!</h1></Col>
       </Row>
       <Row>
-        <Col><p>Thank you for your reservation, <strong>{data?.name}</strong>!</p></Col>
+        <Col><p>Thank you for your reservation, <strong>{data.name}</strong>!</p></Col>
       </Row>
       <Row>
     <Table striped bordered hover responsive>

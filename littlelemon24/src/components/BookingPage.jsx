@@ -29,7 +29,7 @@ function BookingPage() {
   const [availableTimes, dispatch] = useReducer(
     updateTimes, [], initializeTimes);
 
-
+// I'm not even sure if this is used
   const [formData, setFormData] = useState({}); 
 
  
@@ -39,7 +39,7 @@ function BookingPage() {
 
 
   // initial creation of the array for holding reservations
-  // must add new reservations to array using spread operator 
+  // must add new reservations to array using SPREAD operator 
 
   /*
 const [reservations, setReservations] = useState([
@@ -54,6 +54,7 @@ const [reservations, setReservations] = useState([
 */
 
 const [reservations, setReservations] = useState([]);
+// use this state so alert happens AFTER setting form state
 const [shouldAlert, setShouldAlert] = useState(false);
 
 
@@ -67,6 +68,8 @@ const addReservation = (newBooking) => {
 
 
 {/*
+
+  // this version sent alert BEFORE setting state
 
   const handleFormSubmit = async (formData) => {
         const response = await submitAPI(formData);
@@ -87,22 +90,20 @@ const handleFormSubmit = async (formData) => {
   const response = await submitAPI(formData);
   if (response) {
     const finalBooking = { id: Date.now(), ...formData };
-    addReservation(finalBooking); // This updates the state
-    setShouldAlert(true); // Trigger effect
+    addReservation(finalBooking); 
+    setShouldAlert(true); 
   }
 };
 
-// This effect runs whenever 'reservations' changes
+// This version waits to set state BEFORE posting alert
+// useEffect when state changes
 useEffect(() => {
   if (shouldAlert && reservations.length > 0) {
     alert(`Reservation confirmed!:\n${JSON.stringify(reservations, null, 2)}`);
-    setShouldAlert(false); // Reset trigger
+    navigate('/confirmedbooking', { state: { data: reservations } });
+    setShouldAlert(false); 
   }
 }, [reservations, shouldAlert]);
-
-
-
-
 
 
 
