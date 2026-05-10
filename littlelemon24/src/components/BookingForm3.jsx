@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useBooking } from "../context/BookingContext";
 import { useFormik } from 'formik';
 import { Form as BootstrapForm, FormGroup, Label, Input, Button, FormFeedback } from 'reactstrap';
-import { Container, Table, Form } from 'reactstrap';
+import { Container, Table, Row, Col } from 'reactstrap';
 import * as Yup from 'yup';
 
 
@@ -105,7 +105,9 @@ const BookingForm = ({
   return (
     <>
       <div className="BookingFormContainer">
-
+        <Container>
+          <Row>
+            <Col>
        <BootstrapForm 
          className="BookingForm" 
          aria-labelledby="booking-title"
@@ -194,9 +196,7 @@ const BookingForm = ({
            </FormGroup>
 
               <FormGroup>
-                <Label htmlFor="time" id="label-time">
-                  Time:
-                </Label>
+                <Label htmlFor="time" id="label-time">Time:</Label>
                 <select
                   name="time"
                   id="time"
@@ -208,6 +208,7 @@ const BookingForm = ({
                   invalid={formik.touched.time && !!formik.errors.time} 
                   aria-required="true"
                   aria-labelledby="label-time"
+                  className="timeSelect"
                 >
                   <option>00:00</option>
                   {availableTimes.map((timeOption) => (
@@ -219,40 +220,16 @@ const BookingForm = ({
               </FormGroup>
 
 
-{/*
-
-            <FormGroup>
-            <Label htmlFor="time">Time</Label>  
-              <div className="box">
-              {availableTimes.map((timeOption) => (
-                  <div key={timeOption} className="timeOptions">
-                      <input
-                        type="radio"
-                        id={timeOption}
-                        name="time"
-                        value={timeOption}
-                        // onChange={handleTimeChange}
-                        onChange={(e) => {
-                          formik.handleChange(e);
-                        }}       
-                        aria-required="true"
-                      />
-                      {timeOption}
-                  </div>
-                ))}
-                </div>
-          </FormGroup>
-*/}
-
-
         <Button 
             type="submit" 
             color="primary" 
             disabled={!(formik.isValid && formik.dirty)}
         >Submit
         </Button>
-      
         </BootstrapForm>
+        </Col>
+        </Row>
+        </Container>
         </div>
     </>
   );

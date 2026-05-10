@@ -29,7 +29,7 @@ function BookingPage() {
   const [availableTimes, dispatch] = useReducer(
     updateTimes, [], initializeTimes);
 
-// I'm not even sure if this is used
+// Not sure if I need this since I am useing Reducer
   const [formData, setFormData] = useState({}); 
 
  
@@ -53,6 +53,7 @@ const [reservations, setReservations] = useState([
 ]);
 */
 
+// Reservation default value is an empty array
 const [reservations, setReservations] = useState([]);
 // use this state so alert happens AFTER setting form state
 const [shouldAlert, setShouldAlert] = useState(false);
@@ -97,15 +98,16 @@ const handleFormSubmit = async (formData) => {
 
 // This version waits to set state BEFORE posting alert
 // useEffect when state changes
+// this is so clever, the condition is that both reservation and 
+// alert must exist BEFORE the alert is shown. The afterwards it
+// sets Alert back to false
 useEffect(() => {
   if (shouldAlert && reservations.length > 0) {
-    alert(`Reservation confirmed!:\n${JSON.stringify(reservations, null, 2)}`);
+    alert(`Reservation confirmed!`);
     navigate('/confirmedbooking', { state: { data: reservations } });
     setShouldAlert(false); 
   }
 }, [reservations, shouldAlert]);
-
-
 
   return (
     <main role="main">     
@@ -121,7 +123,7 @@ useEffect(() => {
           
           <div className="container">
             <pre>
-              {JSON.stringify(reservations, null, 2)}
+             {/* {JSON.stringify(reservations, null, 2)} */}
             </pre>
           </div>
       </section>

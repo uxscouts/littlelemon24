@@ -467,37 +467,31 @@ gap: 2em;
   grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
   grid-gap: 0px 0px;
   margin: 30px auto;
-  min-width: 400px;
-  max-width: 700px;
+  min-width: 300px;
+  max-width: 600px;
+  padding: 10px;
 }
 
-.BookingForm {
-  font-family: 'Markazi Text';
-}
 
 .BookingForm input, .BookingForm label {
-  font-size: 170%;
+  font-size: 130%;
 }
 
 .BookingFormContainer select {
-  background-color:  white;
-  color: #333;               
-  padding: 10px;             
-  border: 1px solid #ccc;   
-  font-size: 170%;          
+  background-color: white;
+  color: #333;
+  padding: 8px;
+  border: 1px solid #ccc;
+  font-size: 150%;
+  border-radius: 5px;
+  width: 100%;
 }
 
-
-/*
 .BookingFormContainer button {
-  background-color: #ee9972;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  font-size: 170%;
+  font-size: 150%;
   cursor: pointer;
 }
-*/
+
 
 .text-center {
   text-align: center;
@@ -529,4 +523,11 @@ gap: 2em;
   transform: scale(2);
 }
 
+.smaller {
+  font-size: 70%;
+}
+
+.row-title {
+  width: 200px;
+}
 
